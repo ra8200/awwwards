@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import clsx from "clsx";
+import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +16,7 @@ const AnimatedTitle = ({ title, containerClass }) => {
           start: "100 bottom",
           end: "center bottom",
           toggleActions: "play none none reverse",
-        }
+        },
       });
 
       titleAnimation.to(
@@ -26,15 +26,16 @@ const AnimatedTitle = ({ title, containerClass }) => {
           transform: "translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg)",
           ease: "power2.inOut",
           stagger: 0.02,
-        }
-      )
-    }, containerRef)
+        },
+        0
+      );
+    }, containerRef);
 
-    return () => ctx.revert();
+    return () => ctx.revert(); // Clean up on unmount
   }, []);
 
   return (
-    <div ref={containerRef} className={`animated-title ${containerClass}`}>
+    <div ref={containerRef} className={clsx("animated-title", containerClass)}>
       {title.split("<br />").map((line, index) => (
         <div
           key={index}
@@ -50,6 +51,7 @@ const AnimatedTitle = ({ title, containerClass }) => {
         </div>
       ))}
     </div>
-  )
-}
-export default AnimatedTitle
+  );
+};
+
+export default AnimatedTitle;
