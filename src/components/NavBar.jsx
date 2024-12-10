@@ -92,8 +92,9 @@ const NavBar = () => {
               <audio 
                 ref={audioElementRef} 
                 className="hidden" 
-                src="/audio/loop.mp3"
+                src="/audio/Time.mp3"
                 loop
+                autoPlay
               />
                 {[1, 2, 3, 4].map((bar) => (
                   <div key={bar} className={`indicator-line ${isIndicatorActive ? 'active' : ''}`} style={{ animationDelay: `${bar * 0.1}s`}} />

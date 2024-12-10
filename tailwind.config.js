@@ -27,7 +27,17 @@ export default {
           100: '#8E983F',
           300: '#EDFF66'
         }
-      }
+      },
+      clipPath: {
+        "default": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", // Initial state
+        "final": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", // Adjust as needed
+      },
+      height: {
+        "dvh": "100dvh",
+      },
+      translate: {
+        "center": "-50%",
+      },
     },
   },
   plugins: [],

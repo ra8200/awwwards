@@ -2,28 +2,42 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import AnimatedTitle from "./AnimatedTitle";
+import { useEffect, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-  useGSAP(() => {
-    const clipAnimation = gsap.timeline({
-      scrollTrigger: { 
-        trigger: "#clip",
-        start: "center center",
-        end: "+=800 center",
-        scrub: 0.5,
-        pin: true,
-        pinSpacing: true,
-      }
-    });
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-    clipAnimation.to('.mask-clip-path', { 
-      width: '100vw', 
-      height: '100vh',
-      borderRadius: 0,
-    });
-});
+  useEffect(() => {
+    const img = document.querySelector("#clip img");
+    if (img.complete) {
+      setImageLoaded(true);
+    } else {
+      img.addEventListener("load", () => setImageLoaded(true));
+    }
+  }, []);
+
+  useGSAP(() => {
+    if (imageLoaded) {
+      const clipAnimation = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#clip",
+          start: "center center",
+          end: "+=800 center",
+          scrub: 0.5,
+          pin: true,
+          pinSpacing: true,
+        },
+      });
+
+      clipAnimation.to(".mask-clip-path", {
+        width: "100vw",
+        height: "100vh",
+        borderRadius: 0,
+      });
+    }
+  }, [imageLoaded]);
 
   return (
     <div id='about' className='min-h-screen w-screen'>
