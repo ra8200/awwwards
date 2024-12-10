@@ -7,8 +7,8 @@ import gsap from "gsap";
 const navItems = ['Nexus', 'Vault', 'Prologue', 'About', 'Contact'];
 
 const NavBar = () => {
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(false)
+  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
+  const [isIndicatorActive, setIsIndicatorActive] = useState(true);
   
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
@@ -18,19 +18,15 @@ const NavBar = () => {
 
   const { y: currentScrollY } = useWindowScroll();
 
-  // useEffect(() => {
-  //   if(currentScrollY === 0) {
-  //     setIsNavVisible(true);
-  //     navContainerRef.current.classlist.remove('floating-nav');
-  //   }
-  // }, [currentScrollY])
-
   useEffect(() => {
-    if (currentScrollY === 0) {
+    const isScrollingDown = currentScrollY > lastScrollY;
+    const isAtTop = currentScrollY === 0;
+
+    if (isAtTop) {
       // Topmost position: show navbar without floating-nav
       setIsNavVisible(true);
       navContainerRef.current.classList.remove("floating-nav");
-    } else if (currentScrollY > lastScrollY) {
+    } else if (isScrollingDown) {
       // Scrolling down: hide navbar and apply floating-nav
       setIsNavVisible(false);
       navContainerRef.current.classList.add("floating-nav");
