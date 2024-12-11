@@ -7,8 +7,8 @@ import gsap from "gsap";
 const navItems = ['Nexus', 'Vault', 'Prologue', 'About', 'Contact'];
 
 const NavBar = () => {
-  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(true);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
@@ -90,7 +90,6 @@ const NavBar = () => {
                 className="hidden" 
                 src="/audio/Time.mp3"
                 loop
-                autoPlay
               />
                 {[1, 2, 3, 4].map((bar) => (
                   <div key={bar} className={`indicator-line ${isIndicatorActive ? 'active' : ''}`} style={{ animationDelay: `${bar * 0.1}s`}} />
